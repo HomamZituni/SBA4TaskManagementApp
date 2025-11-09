@@ -118,4 +118,18 @@ if (savedTasks) {
     tasks = JSON.parse(savedTasks);
     renderTasks(tasks);
 }
+
+function addTask(task) {
+    tasks.push(task); 
+    localStorage.setItem("tasks", JSON.stringify(tasks)); 
+    renderTasks(tasks); 
+}
+
+
+statusDropdown.addEventListener("change", (event) => {
+    task.status = event.target.value; 
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks(tasks); 
+});
+
 */

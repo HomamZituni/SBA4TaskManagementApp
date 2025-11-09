@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Management App</title>
     <link rel = "stylesheet" type="text/css" href="style.css"/>
+    <script src="app.js"></script> 
 </head>
 <body>
+<h1>Task Manager Application</h1>
 
+
+<div id=" filtersection">
+<label for="statusfilter">Filter by Status:</label>
 <select id="filterStatus">
 <option value="all">All</option>
 <option value="In Progress">In Progress</option>
 <option value="Completed">Completed</option>
 <option value="Overdue">Overdue</option>
 </select>
+<label for="categoryfilter">Filter by Category:</label>
+<select id="categoryFilter">
+<option value="all">All</option>
 
-<script src="app.js"></script>    
+</select>
+</div>
+
+<div id="taskListSection">
+    <ul id="taskList"></ul>
+    </div>
+
 </body>
 </html>
