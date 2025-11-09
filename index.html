@@ -10,7 +10,29 @@
 <body>
 <h1>Task Manager Application</h1>
 
+<!---- Task Input -->
+<div id="taskInputSection">
+<label for="taskname">Task Name:</label>
+<input type="text" id="taskname" placeholder="Enter task name">
 
+<label for="taskcategory">Category:</label>
+<input type="text" id="taskcategory" placeholder="Enter category">
+
+<label for="taskdeadline">Deadline:</label>
+<input type="date" id="taskdeadline">
+
+<label for="taskstatus">Status:</label>
+<select id="taskstatus">
+<option value="In Progress">In Progress</option>
+<option value="Completed">Completed</option>
+<option value="Overdue">Overdue</option>
+</select>
+
+<button id="addtaskbtn">Add Task</button>
+</div>
+
+
+<!--------Task Filter Section------->
 <div id=" filtersection">
 <label for="statusfilter">Filter by Status:</label>
 <select id="filterStatus">
