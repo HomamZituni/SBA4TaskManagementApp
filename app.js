@@ -15,8 +15,6 @@ tasks.push(task);
 console.log(`Task "${name}" added.`);
 console.log(tasks); }
 
-addTask("Buy groceries", "Personal", "2025-11-10", "In Progress");
-addTask("Finish project", "Work", "2025-11-12", "In Progress");
 
 
 
@@ -28,17 +26,24 @@ taskListElement.innerHTML= '';
 
 tasksArray.forEach(function(task)
     { const li= document.createElement("li");
-     li.textContent = `${task.name} Category: ${task.category} | Deadline: ${task.deadline} | Status: ${task.status}`;
-     taskListElement.appendChild(li);
+
+ li.innerHTML = `
+      <strong>${task.name}</strong><br>
+      Category: ${task.category}<br>
+      Deadline: ${task.deadline}<br>
+      Status: ${task.status}
+    `;
+    taskListElement.appendChild(li);
     });
 }
 
-tasks = [
-    { name: "Buy groceries", category: "Personal", deadline: "2025-11-10", status: "In Progress" },
-    { name: "Finish project", category: "Work", deadline: "2025-11-12", status: "In Progress" }
-];
+// Task Status Code
 
-renderTasks(tasks);
+function updateTaskStatus(task) {
+    if (new Date(task.deadline) < new Date()) {
+        task.status = "Overdue";
+    }
+}
 
 
 
