@@ -11,3 +11,5 @@ I had to move some code that was originally separate into the render function, s
 What I would improve: I would probably add a duplicate prevention feature, more styling and more error handling. I would try to write cleaner and easier to read code, 
 but I really did try to, but I had limited time to do this. 
 
+View the website at: https://homamzituni.github.io/SBA4TaskManagementApp/
+
