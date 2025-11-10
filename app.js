@@ -58,14 +58,24 @@ function filterTasks(criteria) {
 
 // Filter Drop Down
 
-const filterDropdown = document.getElementById("filterStatus");
-filterDropdown.addEventListener("change", (event) => {
-    const selectedFilter = event.target.value;
-    const filteredTasks = selectedFilter === "all" ? tasks : filterTasks(selectedFilter);
-    renderTasks(filteredTasks);
-});
+
+// Local Storage
+
+const savedTasks = localStorage.getItem("tasks");
+if (savedTasks) {
+    tasks = JSON.parse(savedTasks);
+    renderTasks(tasks);
+}
 
 
+// Add Task
+
+function addTask(name, category, deadline, status) {
+    const task = { name, category, deadline, status };
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks();
+}
 
 
 
@@ -73,7 +83,7 @@ filterDropdown.addEventListener("change", (event) => {
 
 
 /*
-/* Add Task Function pseudo code
+/* Add Task Function intput pseudo code
 let tasks = [];
 
 function addTask(taskName) {
