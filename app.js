@@ -4,55 +4,63 @@
 let tasks = [];
 
 function addTask(name, category, deadline, status) {
-const task = {
-name: name,
-category: category, 
-deadline: deadline,
-status: status
-};
-tasks.push(task);
-
-console.log(`Task "${name}" added.`);
-console.log(tasks); }
-
+    const task = { name, category, deadline, status };
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks();
+}
 
 
 
 // Task Render Code
 
 function renderTasks(tasksArray) {
-const taskListElement = document.getElementById('taskList');
-taskListElement.innerHTML= '';
+    const taskListElement = document.getElementById('taskList');
+    taskListElement.innerHTML = '';
 
-tasksArray.forEach(function(task)
-    { const li= document.createElement("li");
+    tasksArray.forEach(function(task, index) {
+        const li = document.createElement("li");
 
- li.innerHTML = `
-      <strong>${task.name}</strong><br>
-      Category: ${task.category}<br>
-      Deadline: ${task.deadline}<br>
-    `;
+        li.innerHTML = `
+          <strong>${task.name}</strong><br>
+          Category: ${task.category}<br>
+          Deadline: ${task.deadline}<br>
+        `;
 
- const statusDropdown = document.createElement("select");
-    ["In Progress", "Completed", "Overdue"].forEach(status => {
-        const option = document.createElement("option");
-        option.value = status;
-        option.textContent = status;
-        statusDropdown.appendChild(option);
+        const statusDropdown = document.createElement("select");
+        ["In Progress", "Completed", "Overdue"].forEach(status => {
+            const option = document.createElement("option");
+            option.value = status;
+            option.textContent = status;
+            statusDropdown.appendChild(option);
+        });
+
+        statusDropdown.value = task.status;
+
+        statusDropdown.addEventListener("change", (event) => {
+            task.status = event.target.value;
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            renderTasks(tasks);
+        });
+
+        li.appendChild(statusDropdown);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", () => {
+            tasks.splice(index, 1); 
+            localStorage.setItem("tasks", JSON.stringify(tasks)); 
+            renderTasks(tasks); 
+        });
+        li.appendChild(deleteBtn);
+
+        taskListElement.appendChild(li);
     });
+}
 
-    statusDropdown.value = task.status;
 
-    statusDropdown.addEventListener("change", (event) => {
-        task.status = event.target.value;
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-        renderTasks(tasks);
-    });
+ 
 
-    li.appendChild(statusDropdown);
-    taskListElement.appendChild(li);
-});
-}    
 // Task Status Code
 
 function updateTaskStatus(task) {
@@ -89,18 +97,22 @@ if (savedTasks) {
     renderTasks(tasks);
 }
 
+// Task Button Event Listener
+document.getElementById('addtaskbtn').addEventListener('click', () => {
+const name = document.getElementById('taskname').value;
+const category = document.getElementById('taskcategory').value;
+const deadline = document.getElementById('taskdeadline').value;
+const status = document.getElementById('taskstatus').value;
 
-// Add Task
+if (!name || !category || !deadline) return;
+const task = { name, category, deadline, status };
+tasks.push(task);
 
-function addTask(name, category, deadline, status) {
-    const task = { name, category, deadline, status };
-    tasks.push(task);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+localStorage.setItem("tasks", JSON.stringify(tasks));
     renderTasks();
-}
+});
 
-
-
+// Delete Button 
 
 
 
